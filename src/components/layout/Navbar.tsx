@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Menu, X, Phone, Mail } from 'lucide-react'
+import logoUrl from '../../assets/logo.png'
 
 const links = [
   { href: '#work', label: 'Website' },
@@ -24,7 +25,7 @@ export default function Navbar() {
       <div className="w-full mx-auto px-5 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between h-14 sm:h-16">
         {/* Logo */}
         <a href="#top" className="relative z-50">
-          <img src="/src/assets/logo.png" alt="Flowatik" className="h-14 w-auto object-contain" />
+          <img src={logoUrl} alt="Flowatik" className="h-14 w-auto object-contain" fetchPriority="high" />
         </a>
 
         {/* Desktop nav links */}

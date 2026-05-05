@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useRef, useEffect, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Check, CalendarDays, Phone, Video, MoreVertical, RotateCcw } from 'lucide-react'
+import wpBgImg from '../../../assets/wp-bg-img.jpg'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
@@ -113,7 +114,7 @@ export function BookingChat() {
         ref={scrollRef}
         className="flex-1 overflow-y-auto px-3 py-3 space-y-1.5 [&::-webkit-scrollbar]:hidden"
         style={{
-          backgroundImage: 'url(/src/assets/wp-bg-img.jpg)',
+          backgroundImage: `url(${wpBgImg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           scrollbarWidth: 'none',

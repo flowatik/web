@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Phone, Video, MoreVertical } from 'lucide-react'
+import wpBgImg from '../../../assets/wp-bg-img.jpg'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -93,7 +94,7 @@ export default function FrontDeskDemo({ onAllAnswered }: { onAllAnswered?: () =>
         ref={scrollRef}
         className="flex-1 overflow-y-auto px-3 py-3 space-y-1.5 [&::-webkit-scrollbar]:hidden"
         style={{
-          backgroundImage: 'url(/src/assets/wp-bg-img.jpg)',
+          backgroundImage: `url(${wpBgImg})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           scrollbarWidth: 'none',

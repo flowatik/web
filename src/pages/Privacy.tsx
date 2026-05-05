@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
+import logoUrl from '../assets/logo.png'
 
 const sections = [
   {
@@ -81,7 +82,7 @@ export default function Privacy() {
       <header className="fixed top-0 inset-x-0 z-50 bg-canvas border-b border-hairline">
         <div className="w-full mx-auto px-5 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between h-14 sm:h-16">
           <Link to="/">
-            <img src="/src/assets/logo.png" alt="Flowatik" className="h-14 w-auto object-contain" />
+            <img src={logoUrl} alt="Flowatik" className="h-14 w-auto object-contain" />
           </Link>
           <Link
             to="/"
