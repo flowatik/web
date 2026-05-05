@@ -57,12 +57,6 @@ export default function FrontDeskDemo({ onAllAnswered }: { onAllAnswered?: () =>
     setLoading(false)
   }
 
-  function reset() {
-    setMessages([GREETING])
-    setUsed(new Set())
-    setLoading(false)
-  }
-
   const remaining = QUESTIONS.map((_, i) => i).filter((i) => !used.has(i))
 
   return (
