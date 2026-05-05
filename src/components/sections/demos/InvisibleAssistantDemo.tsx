@@ -78,7 +78,7 @@ export function InvisibleAssistantProvider({ children }: { children: ReactNode }
 /* ─── Chat (for phone frame) ─── */
 
 export function BookingChat() {
-  const { phase, messages, run, reset } = useContext(Ctx)
+  const { phase, messages, run } = useContext(Ctx)
   const scrollRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
