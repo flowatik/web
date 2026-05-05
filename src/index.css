@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #ffffff;
+  --color-ink: #0a0f1f;
+  --color-ink-soft: #475067;
+  --color-hairline: #e8ebf1;
+
+  /* Blue family */
+  --color-accent: #1747ff;
+  --color-accent-deep: #0b2bb8;
+  --color-accent-glow: #5c7bff;
+
+  /* Purple family */
+  --color-violet: #7c3aff;
+  --color-violet-deep: #4b1fb8;
+  --color-violet-glow: #b08bff;
+
+  --color-mist: #f6f8fc;
+  --color-mist-warm: #f8f4ff;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --shadow-lift: 0 1px 0 rgba(10, 15, 31, 0.04),
+    0 24px 48px -24px rgba(10, 15, 31, 0.12);
+  --shadow-card: 0 1px 0 rgba(10, 15, 31, 0.04),
+    0 8px 24px -12px rgba(10, 15, 31, 0.08);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink-soft);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+
+  ::selection {
+    background: var(--color-violet);
+    color: #fff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-ink);
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  input, textarea, select, button {
+    font-family: inherit;
+  }
+}
+
+/* Snap scrolling */
+.scroll-snap-main {
+  scroll-snap-type: y proximity;
+}
+
+.scroll-snap-main > section,
+.scroll-snap-main section[id] {
+  scroll-snap-align: start;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .text-gradient-bv {
+    background: linear-gradient(120deg, var(--color-accent) 0%, var(--color-violet) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gradient-bv {
+    background: linear-gradient(120deg, var(--color-accent) 0%, var(--color-violet) 100%);
+  }
+  .bg-gradient-bv-soft {
+    background: linear-gradient(
+      120deg,
+      rgba(23, 71, 255, 0.08) 0%,
+      rgba(124, 58, 255, 0.08) 100%
+    );
+  }
+  .ring-gradient-bv {
+    background: linear-gradient(120deg, var(--color-accent) 0%, var(--color-violet) 100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ────────────────────────────────────────────────────────── */
+/*  CSS scroll-driven animations                              */
+/*                                                            */
+/*  Uses the new `animation-timeline` spec (Chrome 115+,      */
+/*  Edge 115+, Firefox behind a flag, Safari shipping).       */
+/*  Browsers without support quietly skip — content lands in  */
+/*  its final state, no broken layouts.                       */
+/* ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Top scroll progress bar (driven by document scroll) */
+  @keyframes flowatik-scroll-progress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .scroll-progress {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 2px;
+    z-index: 60;
+    background: linear-gradient(
+      90deg,
+      var(--color-accent) 0%,
+      var(--color-violet) 100%
+    );
+    transform-origin: left;
+    transform: scaleX(0);
+    pointer-events: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      animation: flowatik-scroll-progress linear forwards;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  /* 2. View-timeline entrance: fade + slight rise as element enters viewport */
+  @keyframes flowatik-view-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @supports (animation-timeline: view()) {
+    .view-rise {
+      opacity: 0;
+      animation: flowatik-view-rise both linear;
+      animation-timeline: view();
+      animation-range: entry 5% cover 28%;
+    }
+  }
+
+  /* 3. Hero floating-card parallax (driven by document scroll) */
+  @keyframes flowatik-parallax-back  { to { transform: translateY(-30px); } }
+  @keyframes flowatik-parallax-mid   { to { transform: translateY(-55px); } }
+  @keyframes flowatik-parallax-front { to { transform: translateY(-80px); } }
+
+  @supports (animation-timeline: scroll()) {
+    .hero-parallax-back {
+      animation: flowatik-parallax-back linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+    .hero-parallax-mid {
+      animation: flowatik-parallax-mid linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+    .hero-parallax-front {
+      animation: flowatik-parallax-front linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 80vh;
+    }
+  }
+}
