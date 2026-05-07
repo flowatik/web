@@ -13,7 +13,7 @@ export default function Pivot() {
   return (
     <section
       ref={ref}
-      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden bg-canvas"
+      className="relative py-24 sm:py-32 lg:py-40 overflow-hidden bg-ink"
     >
       <Container>
         <motion.div
@@ -23,11 +23,11 @@ export default function Pivot() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="text-sm sm:text-base text-ink-soft/60 font-medium">
+          <p className="text-sm sm:text-base text-canvas/50 font-medium">
             You built the business. The website should carry its weight.
           </p>
 
-          <h2 className="mt-6 sm:mt-8 text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] text-ink tracking-[-0.025em] leading-[1.2] text-balance">
+          <h2 className="mt-6 sm:mt-8 text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] text-canvas tracking-[-0.025em] leading-[1.2] text-balance">
             What if your site could{' '}
             <span className="relative inline-block">
               <span className="text-gradient-bv font-semibold">reply, book, and follow up</span>
@@ -46,11 +46,11 @@ export default function Pivot() {
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 sm:mt-10 mx-auto h-px w-12 bg-hairline origin-center"
+            className="mt-8 sm:mt-10 mx-auto h-px w-12 bg-canvas/20 origin-center"
             aria-hidden
           />
 
-          <p className="mt-6 sm:mt-8 text-base sm:text-lg text-ink-soft max-w-xl mx-auto text-pretty leading-relaxed">
+          <p className="mt-6 sm:mt-8 text-base sm:text-lg text-canvas/70 max-w-xl mx-auto text-pretty leading-relaxed">
             Three quiet automations turn your website from a brochure
             into a teammate that handles the busywork 24/7.
           </p>

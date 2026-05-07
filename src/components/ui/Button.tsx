@@ -13,11 +13,11 @@ type Props = {
 }
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2'
+  'inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-ink text-canvas hover:bg-ink/90',
-  ghost: 'bg-transparent text-ink border border-hairline hover:border-ink',
+  primary: 'bg-ink text-canvas hover:bg-ink/90 hover:-translate-y-px active:translate-y-0 shadow-card hover:shadow-lift',
+  ghost: 'bg-transparent text-ink border border-hairline hover:border-ink hover:-translate-y-px active:translate-y-0',
 }
 
 const sizes: Record<Size, string> = {

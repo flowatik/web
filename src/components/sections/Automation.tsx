@@ -144,7 +144,7 @@ export default function Automation() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, ease, delay: 0.1 + i * 0.08 }}
-              className="group relative text-left rounded-3xl border border-hairline bg-canvas overflow-hidden transition-all duration-300 hover:border-violet/40 hover:shadow-card focus:outline-none focus-visible:border-violet focus-visible:ring-4 focus-visible:ring-violet/10 flex flex-col"
+              className="group relative text-left rounded-3xl border border-hairline bg-canvas overflow-hidden transition-all duration-300 hover:border-violet/40 hover:shadow-lift hover:-translate-y-1 focus:outline-none focus-visible:border-violet focus-visible:ring-4 focus-visible:ring-violet/10 flex flex-col"
             >
               {/* Preview area */}
               <div className="p-4 pb-0 bg-mist/30 border-b border-hairline">

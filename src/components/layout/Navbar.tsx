@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className="w-full mx-auto px-5 sm:px-6 lg:px-8 max-w-7xl flex items-center justify-between h-14 sm:h-16">
         {/* Logo */}
         <a href="#top" className="relative z-50">
-          <img src={logoUrl} alt="Flowatik" className="h-14 w-auto object-contain" fetchPriority="high" />
+          <img src={logoUrl} alt="Flowatik" className="h-12 sm:h-14 w-auto object-contain" fetchPriority="high" />
         </a>
 
         {/* Desktop nav links */}
@@ -71,7 +71,7 @@ export default function Navbar() {
 
       {/* Mobile drawer — top accounts for contact bar (36px) + nav (56px/64px) */}
       <div
-        className={`md:hidden fixed inset-0 top-[92px] sm:top-[100px] z-40 transition-all duration-300 ${
+        className={`md:hidden fixed inset-0 top-14 sm:top-16 z-40 transition-all duration-300 ${
           open ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
       >

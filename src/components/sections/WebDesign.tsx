@@ -26,7 +26,7 @@ export default function WebDesign() {
   return (
     <section
       id="work"
-      className="relative min-h-screen flex flex-col justify-center py-16 sm:py-20 lg:py-24 overflow-hidden bg-canvas snap-start"
+      className="relative min-h-screen flex flex-col justify-center py-16 sm:py-20 lg:py-24 overflow-hidden bg-mist snap-start"
     >
       <Container>
         <div className="grid lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
@@ -67,7 +67,7 @@ export default function WebDesign() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base text-ink font-semibold leading-snug">{f.title}</h3>
-                    <p className="mt-1 text-ink-soft text-[15px]">{f.body}</p>
+                    <p className="mt-1 text-ink-soft text-base">{f.body}</p>
                   </div>
                 </motion.li>
               ))}

@@ -10,6 +10,11 @@ export default function Hero() {
       id="top"
       className="relative min-h-screen flex flex-col justify-center pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-32 lg:pb-20 overflow-hidden bg-canvas"
     >
+      {/* Ambient glow — purely decorative */}
+      <div aria-hidden className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 right-[5%] w-[700px] h-[700px] rounded-full bg-violet/[0.05] blur-3xl" />
+        <div className="absolute top-[35%] -left-40 w-[600px] h-[600px] rounded-full bg-accent/[0.04] blur-3xl" />
+      </div>
       <div className="w-full mx-auto px-5 sm:px-6 lg:px-8 max-w-7xl grid lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center relative">
         <motion.div
           className="lg:col-span-7"

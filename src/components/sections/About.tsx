@@ -73,7 +73,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, ease, delay: 0.1 + i * 0.1 }}
-              className="group relative rounded-3xl border border-hairline bg-canvas p-7 lg:p-8 transition-colors hover:border-violet/30"
+              className="group relative rounded-3xl border border-hairline bg-canvas p-7 lg:p-8 transition-all duration-300 hover:border-violet/30 hover:-translate-y-1.5 hover:shadow-lift"
             >
               {/* Mini-visual at top */}
               <div className="h-20 mb-7 grid place-items-center">
@@ -82,7 +82,7 @@ export default function About() {
               <h3 className="text-xl lg:text-2xl text-ink leading-snug font-semibold tracking-[-0.01em]">
                 {p.title}
               </h3>
-              <p className="mt-3 text-ink-soft text-pretty text-[15px] leading-relaxed">
+              <p className="mt-3 text-ink-soft text-pretty text-base leading-relaxed">
                 {p.body}
               </p>
             </motion.article>
