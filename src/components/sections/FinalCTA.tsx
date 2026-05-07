@@ -433,43 +433,66 @@ function LightChipSelector({ label, value, onChange, options, required }: ChipSe
 function SuccessState({ firstName }: { firstName: string }) {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.94 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.35 }}
       className="text-center py-12"
     >
-      <div className="relative mx-auto w-20 h-20 flex items-center justify-center">
-        <motion.span
-          initial={{ scale: 0.7, opacity: 0.5 }}
-          animate={{ scale: 1.6, opacity: 0 }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeOut' }}
-          className="absolute inset-0 rounded-full bg-gradient-bv"
+      <div className="relative mx-auto w-24 h-24 flex items-center justify-center">
+        {/* CSS-driven rings — runs on compositor, no JS jank */}
+        <span className="absolute w-16 h-16 rounded-full bg-gradient-bv opacity-60 animate-ping" />
+        <span
+          className="absolute w-16 h-16 rounded-full bg-gradient-bv opacity-40 animate-ping"
+          style={{ animationDelay: '0.75s', animationDuration: '1.5s' }}
         />
-        <motion.span
-          initial={{ scale: 0.7, opacity: 0.5 }}
-          animate={{ scale: 1.6, opacity: 0 }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeOut', delay: 0.5 }}
-          className="absolute inset-0 rounded-full bg-gradient-bv"
-        />
-        <div className="relative w-16 h-16 rounded-full bg-gradient-bv grid place-items-center shadow-[0_4px_28px_rgba(23,71,255,0.4)]">
-          <Check size={28} strokeWidth={2.5} className="text-canvas" />
-        </div>
+
+        {/* Circle pops in with spring */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.1, duration: 0.55, ease: [0.34, 1.56, 0.64, 1] }}
+          className="relative z-10 w-16 h-16 rounded-full bg-gradient-bv grid place-items-center shadow-[0_4px_28px_rgba(23,71,255,0.4)]"
+        >
+          <motion.div
+            initial={{ scale: 0, rotate: -45 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ delay: 0.45, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+          >
+            <Check size={28} strokeWidth={2.5} className="text-canvas" />
+          </motion.div>
+        </motion.div>
       </div>
 
-      <h3 className="mt-7 text-2xl text-ink font-semibold tracking-[-0.02em]">
+      <motion.h3
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.55, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-7 text-2xl text-ink font-semibold tracking-[-0.02em]"
+      >
         Thanks{firstName ? `, ${firstName}` : ''}!
-      </h3>
-      <p className="mt-3 text-ink-soft max-w-xs mx-auto text-sm leading-relaxed">
-        We'll read what you've shared and get back to you within one working day with a clear, honest plan.
-      </p>
+      </motion.h3>
 
-      <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-mist px-4 py-2">
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.65, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-3 text-ink-soft max-w-xs mx-auto text-sm leading-relaxed"
+      >
+        We'll read what you've shared and get back to you within one working day with a clear, honest plan.
+      </motion.p>
+
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.75, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-mist px-4 py-2"
+      >
         <span className="relative flex h-1.5 w-1.5 shrink-0">
           <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-60" />
           <span className="relative rounded-full h-1.5 w-1.5 bg-emerald-500" />
         </span>
         <span className="text-[11px] text-ink-soft/55">We reply within one business day</span>
-      </div>
+      </motion.div>
     </motion.div>
   )
 }
