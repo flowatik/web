@@ -49,19 +49,19 @@ const goalOptions: GoalOption[] = [
 
 const trustPoints = [
   {
-    stat: '5 sec',
-    label: 'To earn trust online',
-    body: 'We design every page to signal credibility before a single word is read.',
+    stat: '0',
+    label: 'Templates used, ever',
+    body: 'Every page is designed and coded for you from scratch. Nothing recycled, nothing generic.',
   },
   {
-    stat: '3–5 weeks',
-    label: 'From first call to live site',
-    body: 'Clear milestones, real progress — no delays, no surprises.',
+    stat: '100%',
+    label: 'Yours to keep',
+    body: 'Code, content, domain, all yours. No platform lock-in, no recurring fees, no strings.',
   },
   {
-    stat: '24/7',
-    label: 'Automations that never sleep',
-    body: 'Bookings, follow-ups, and replies handled around the clock.',
+    stat: '< 24s',
+    label: 'Automated first reply',
+    body: 'The moment a lead reaches out, automation responds instantly, no waiting, no manual effort.',
   },
 ]
 
@@ -211,8 +211,8 @@ export default function FinalCTA() {
                     transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.08 }}
                     className="flex items-center gap-4 rounded-2xl border border-hairline bg-white px-5 py-4 shadow-card hover:border-accent/25 hover:shadow-lift hover:-translate-y-0.5 transition-all duration-300"
                   >
-                    <div className="shrink-0 w-16 text-right">
-                      <span className="text-[1.45rem] font-bold text-gradient-bv tabular-nums leading-none">
+                    <div className="shrink-0 w-16 text-center">
+                      <span className="text-[1.45rem] font-bold text-gradient-bv tabular-nums leading-none whitespace-nowrap">
                         {t.stat}
                       </span>
                     </div>
