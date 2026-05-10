@@ -69,7 +69,7 @@ To exercise any of these rights, contact us at info@flowatik.com. We will respon
     body: `For any privacy-related questions or requests, please reach us at:
 
 Email: info@flowatik.com
-Phone: +961 78 896 067
+Phone: +961 78 999 508
 Location: Beirut, Lebanon`,
   },
 ]

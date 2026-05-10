@@ -110,11 +110,11 @@ export default function Navbar() {
             </div>
             <div className="pt-3 mt-1 border-t border-hairline flex flex-col gap-2.5 px-4">
               <a
-                href="tel:+96178896067"
+                href="tel:+96178999508"
                 className="flex items-center gap-2 text-sm text-ink-soft hover:text-ink transition-colors"
               >
                 <Phone size={14} strokeWidth={2} />
-                <span>+961 78 896 067</span>
+                <span>+961 78 999 508</span>
               </a>
               <a
                 href="mailto:info@flowatik.com"

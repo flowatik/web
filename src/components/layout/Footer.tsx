@@ -1,34 +1,36 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Mail, Phone } from 'lucide-react'
 
-const socials = [
+const connectItems = [
   {
-    label: 'LinkedIn',
-    href: '#',
-    path: (
-      <>
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="2" y="9" width="4" height="12" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="4" cy="4" r="2" fill="none" stroke="currentColor" strokeWidth="1.5" />
-      </>
-    ),
+    label: 'info@flowatik.com',
+    href: 'mailto:info@flowatik.com',
+    icon: <Mail size={12} strokeWidth={1.75} />,
   },
   {
-    label: 'Instagram',
-    href: '#',
-    path: (
-      <>
+    label: '+961 78 999 508',
+    href: 'tel:+96178999508',
+    icon: <Phone size={12} strokeWidth={1.75} />,
+  },
+  {
+    label: '@flowatik.ai',
+    href: 'https://instagram.com/flowatik.ai',
+    icon: (
+      <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden>
         <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
         <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" />
-      </>
+      </svg>
     ),
   },
   {
-    label: 'X',
-    href: '#',
-    path: (
-      <path d="M4 4l16 16M20 4 4 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    label: '+961 78 999 508',
+    href: 'https://wa.me/96178999508',
+    icon: (
+      <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden>
+        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M8.5 9.5c.2.8.8 2.2 2 3.4 1.2 1.2 2.6 1.8 3.4 2 .4.1.7 0 .9-.2l.7-.7c.2-.2.5-.2.7 0l1.4 1.4c.2.2.2.5 0 .7l-.6.6c-.6.6-1.5.8-2.3.5-1.3-.5-3.1-1.5-4.5-2.9S8.1 11.3 7.6 10c-.3-.8-.1-1.7.5-2.3l.6-.6c.2-.2.5-.2.7 0l1.4 1.4c.2.2.2.5 0 .7l-.7.7c-.2.2-.3.5-.2.9Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
     ),
   },
 ]
@@ -86,8 +88,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Middle: nav + contact grid */}
-        <div className="py-12 grid grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-8">
+        {/* Middle: nav + connect grid */}
+        <div className="py-12 grid grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8">
 
           <div>
             <p className="text-[10px] uppercase tracking-[0.22em] text-ink-soft/45 font-mono mb-4">Solutions</p>
@@ -153,47 +155,24 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-ink-soft/45 font-mono mb-4">Contact</p>
+            <p className="text-[10px] uppercase tracking-[0.22em] text-ink-soft/45 font-mono mb-4">Connect</p>
             <ul className="space-y-3">
-              <li>
-                <a
-                  href="mailto:info@flowatik.com"
-                  className="group flex items-center gap-2.5 text-sm text-ink-soft hover:text-ink transition-colors duration-200"
-                >
-                  <span className="flex-shrink-0 w-7 h-7 rounded-lg border border-hairline bg-mist grid place-items-center group-hover:border-ink/20 group-hover:bg-mist-warm transition-colors duration-200">
-                    <Mail size={12} strokeWidth={1.75} />
-                  </span>
-                  <span>info@flowatik.com</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+96178896067"
-                  className="group flex items-center gap-2.5 text-sm text-ink-soft hover:text-ink transition-colors duration-200"
-                >
-                  <span className="flex-shrink-0 w-7 h-7 rounded-lg border border-hairline bg-mist grid place-items-center group-hover:border-ink/20 group-hover:bg-mist-warm transition-colors duration-200">
-                    <Phone size={12} strokeWidth={1.75} />
-                  </span>
-                  <span>+961 78 896 067</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.22em] text-ink-soft/45 font-mono mb-4">Follow</p>
-            <div className="flex gap-2.5">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="group w-9 h-9 grid place-items-center rounded-full border border-hairline text-ink-soft hover:text-canvas hover:border-transparent hover:bg-gradient-bv hover:shadow-[0_2px_12px_rgba(124,58,255,0.35)] transition-all duration-200"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden>{s.path}</svg>
-                </a>
+              {connectItems.map((item) => (
+                <li key={item.label + item.href}>
+                  <a
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="group flex items-center gap-2.5 text-sm text-ink-soft hover:text-ink transition-colors duration-200"
+                  >
+                    <span className="flex-shrink-0 w-7 h-7 rounded-lg border border-hairline bg-mist grid place-items-center group-hover:border-ink/20 group-hover:bg-mist-warm transition-colors duration-200">
+                      {item.icon}
+                    </span>
+                    <span>{item.label}</span>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
         </div>

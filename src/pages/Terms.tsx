@@ -102,7 +102,7 @@ We reserve the right to terminate immediately if payment obligations are not met
     body: `For any questions about these Terms, please reach us at:
 
 Email: info@flowatik.com
-Phone: +961 78 896 067
+Phone: +961 78 999 508
 Location: Beirut, Lebanon`,
   },
 ]
