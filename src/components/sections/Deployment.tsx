@@ -137,11 +137,9 @@ export default function Deployment() {
             </p>
           </motion.div>
 
-          {/* ── RIGHT: Cycle (desktop) / compact ring + vertical list (mobile + tablet) ── */}
+          {/* ── RIGHT: Cycle diagram (same shape at all breakpoints, scales down on mobile) ── */}
           <div className="lg:col-span-7 relative">
             <CycleDiagram />
-            <MobileCircle />
-            <MobileCycleList />
           </div>
         </div>
       </div>
@@ -188,7 +186,7 @@ function CycleDiagram() {
   }
 
   return (
-    <div className="hidden lg:block relative mx-auto w-full max-w-[clamp(380px,46vw,560px)] aspect-square">
+    <div className="relative mx-auto w-full max-w-[clamp(240px,72vw,360px)] lg:max-w-[clamp(380px,46vw,560px)] aspect-square">
       {/* The SVG ring */}
       <svg
         viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
@@ -394,19 +392,19 @@ function CycleDiagram() {
                   ease,
                   delay: 0.55 + (p.angle / 360) * 1.2,
                 }}
-                className={`w-[130px] flex flex-col gap-0.5 cursor-default outline-none rounded-md focus-visible:ring-2 focus-visible:ring-violet/30 ${textAlign}`}
+                className={`w-[72px] sm:w-[92px] lg:w-[130px] flex flex-col gap-0.5 cursor-default outline-none rounded-md focus-visible:ring-2 focus-visible:ring-violet/30 ${textAlign}`}
               >
-                <span className="text-[11px] font-mono tabular-nums text-gradient-bv font-semibold tracking-[0.06em]">
+                <span className="text-[9px] sm:text-[10px] lg:text-[11px] font-mono tabular-nums text-gradient-bv font-semibold tracking-[0.06em]">
                   {p.index}
                 </span>
                 <span
-                  className={`text-[15px] font-semibold leading-tight tracking-[-0.01em] transition-colors duration-200 ${
+                  className={`text-[12px] sm:text-[13px] lg:text-[15px] font-semibold leading-tight tracking-[-0.01em] transition-colors duration-200 ${
                     isActive ? "text-violet" : "text-ink"
                   }`}
                 >
                   {p.title}.
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-ink-soft/65">
+                <span className="text-[8px] sm:text-[9px] lg:text-[10px] font-mono uppercase tracking-[0.2em] text-ink-soft/65 whitespace-nowrap">
                   {p.week}
                 </span>
               </motion.div>
@@ -429,16 +427,16 @@ function CycleDiagram() {
         transition={{ duration: 0.6, ease, delay: 0.25 }}
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none"
       >
-        <div className="inline-flex flex-col items-center gap-1.5 px-5 py-3 rounded-2xl bg-canvas/70 backdrop-blur-[2px] border border-hairline shadow-[0_2px_18px_-8px_rgba(10,15,31,0.12)]">
-          <div className="flex items-center gap-2 text-[9.5px] font-mono uppercase tracking-[0.28em] text-ink-soft/55">
-            <span className="h-px w-3 bg-hairline" />
+        <div className="inline-flex flex-col items-center gap-1 lg:gap-1.5 px-3 py-2 lg:px-5 lg:py-3 rounded-xl lg:rounded-2xl bg-canvas/70 backdrop-blur-[2px] border border-hairline shadow-[0_2px_18px_-8px_rgba(10,15,31,0.12)]">
+          <div className="flex items-center gap-1.5 lg:gap-2 text-[7.5px] sm:text-[8.5px] lg:text-[9.5px] font-mono uppercase tracking-[0.24em] lg:tracking-[0.28em] text-ink-soft/55">
+            <span className="h-px w-2 lg:w-3 bg-hairline" />
             Cycle · 04.1
-            <span className="h-px w-3 bg-hairline" />
+            <span className="h-px w-2 lg:w-3 bg-hairline" />
           </div>
-          <div className="text-[17px] italic font-light text-ink leading-none tracking-[-0.01em]">
+          <div className="text-[12px] sm:text-[14px] lg:text-[17px] italic font-light text-ink leading-none tracking-[-0.01em]">
             a deliberate cycle.
           </div>
-          <div className="flex items-center gap-1.5 text-[9.5px] font-mono uppercase tracking-[0.22em] text-gradient-bv">
+          <div className="flex items-center gap-1 lg:gap-1.5 text-[7.5px] sm:text-[8.5px] lg:text-[9.5px] font-mono uppercase tracking-[0.2em] lg:tracking-[0.22em] text-gradient-bv">
             <span className="w-1 h-1 rounded-full bg-gradient-bv" />
             6 weeks · 4 phases
           </div>
@@ -472,8 +470,9 @@ function PhaseTooltip({ phase }: { phase: Phase }) {
       exit={{ opacity: 0, y: 6 }}
       transition={{ duration: 0.2, ease }}
       // bottom-full sits the box just above the label; pb-3 leaves a 12px
-      // bridge so moving the cursor up doesn't drop the hover.
-      className="absolute bottom-full left-1/2 pb-3 z-30 pointer-events-auto"
+      // bridge so moving the cursor up doesn't drop the hover. Hidden on mobile
+      // because the small viewport doesn't have room above each label.
+      className="hidden lg:block absolute bottom-full left-1/2 pb-3 z-30 pointer-events-auto"
     >
       <div className="relative w-[240px] rounded-2xl border border-hairline bg-canvas shadow-lift p-4">
         <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.18em]">
@@ -499,254 +498,3 @@ function PhaseTooltip({ phase }: { phase: Phase }) {
   );
 }
 
-/* ──────────────────────────────────────────────────────────────── */
-/*  Compact circular cycle — shown on mobile/tablet (< lg)          */
-/*  Mirrors the desktop diagram visually but with no labels/tooltips.*/
-/* ──────────────────────────────────────────────────────────────── */
-
-function MobileCircle() {
-  const SVG = 200;
-  const R = 70;
-  const TRACER_DUR = 12;
-
-  return (
-    <div className="lg:hidden relative mx-auto mb-8 sm:mb-10 w-[180px] sm:w-[210px] aspect-square">
-      <svg
-        viewBox={`0 0 ${SVG} ${SVG}`}
-        width="100%"
-        height="100%"
-        className="absolute inset-0"
-        aria-hidden
-      >
-        <defs>
-          <linearGradient
-            id="mcycle-gradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="var(--color-accent)" />
-            <stop offset="100%" stopColor="var(--color-violet)" />
-          </linearGradient>
-          <radialGradient id="mcentre-glow" cx="50%" cy="50%" r="50%">
-            <stop
-              offset="0%"
-              stopColor="var(--color-violet)"
-              stopOpacity="0.18"
-            />
-            <stop
-              offset="60%"
-              stopColor="var(--color-accent)"
-              stopOpacity="0.06"
-            />
-            <stop
-              offset="100%"
-              stopColor="var(--color-violet)"
-              stopOpacity="0"
-            />
-          </radialGradient>
-        </defs>
-
-        {/* Centre glow */}
-        <circle
-          cx={SVG / 2}
-          cy={SVG / 2}
-          r={R - 12}
-          fill="url(#mcentre-glow)"
-        />
-
-        {/* Dashed outer halo */}
-        <circle
-          cx={SVG / 2}
-          cy={SVG / 2}
-          r={R + 8}
-          fill="none"
-          stroke="var(--color-hairline)"
-          strokeWidth={0.6}
-          strokeDasharray="1.5 3"
-          opacity={0.55}
-        />
-
-        {/* Base hairline ring */}
-        <circle
-          cx={SVG / 2}
-          cy={SVG / 2}
-          r={R}
-          fill="none"
-          stroke="var(--color-hairline)"
-          strokeWidth={1}
-        />
-
-        {/* Animated gradient arc — strokes clockwise from 12 o'clock */}
-        <motion.circle
-          cx={SVG / 2}
-          cy={SVG / 2}
-          r={R}
-          fill="none"
-          stroke="url(#mcycle-gradient)"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          pathLength={1}
-          transform={`rotate(-90 ${SVG / 2} ${SVG / 2})`}
-          initial={{ pathLength: 0, opacity: 0 }}
-          whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1.2, ease }}
-        />
-
-        {/* Direction chevrons at midpoints */}
-        {[45, 135, 225, 315].map((theta) => {
-          const rad = ((theta - 90) * Math.PI) / 180;
-          const cx = SVG / 2 + Math.cos(rad) * R;
-          const cy = SVG / 2 + Math.sin(rad) * R;
-          return (
-            <motion.path
-              key={`mchev-${theta}`}
-              d="M -2.5 -3 L 2.5 0 L -2.5 3"
-              fill="none"
-              stroke="url(#mcycle-gradient)"
-              strokeWidth={1.25}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              transform={`translate(${cx} ${cy}) rotate(${theta})`}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.85 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: 0.85 + (theta / 360) * 0.4, ease }}
-            />
-          );
-        })}
-
-        {/* Continuous tracer */}
-        <motion.g
-          style={{
-            transformOrigin: `${SVG / 2}px ${SVG / 2}px`,
-            transformBox: "view-box",
-          }}
-          animate={{ rotate: 360 }}
-          transition={{ duration: TRACER_DUR, ease: "linear", repeat: Infinity }}
-        >
-          <circle
-            cx={SVG / 2}
-            cy={SVG / 2 - R}
-            r={5.5}
-            fill="url(#mcycle-gradient)"
-            opacity={0.2}
-          />
-          <circle
-            cx={SVG / 2}
-            cy={SVG / 2 - R}
-            r={2.75}
-            fill="url(#mcycle-gradient)"
-          />
-        </motion.g>
-
-        {/* Phase dots */}
-        {phases.map((p, i) => {
-          const rad = ((p.angle - 90) * Math.PI) / 180;
-          const cx = SVG / 2 + Math.cos(rad) * R;
-          const cy = SVG / 2 + Math.sin(rad) * R;
-          const isLast = i === phases.length - 1;
-          return (
-            <g key={`mdot-${p.id}`}>
-              {isLast && (
-                <circle cx={cx} cy={cy} r={6} fill="var(--color-violet)" opacity={0.25}>
-                  <animate
-                    attributeName="r"
-                    values="5;10;5"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                  <animate
-                    attributeName="opacity"
-                    values="0.4;0;0.4"
-                    dur="2s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              )}
-              <circle
-                cx={cx}
-                cy={cy}
-                r={4.5}
-                fill="var(--color-canvas)"
-                stroke="var(--color-ink-soft)"
-                strokeOpacity={0.3}
-                strokeWidth={0.75}
-              />
-              <circle cx={cx} cy={cy} r={3} fill="url(#mcycle-gradient)" />
-            </g>
-          );
-        })}
-      </svg>
-
-      {/* Centre chip */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.5, delay: 0.25, ease }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none"
-      >
-        <div className="text-[8.5px] font-mono uppercase tracking-[0.28em] text-ink-soft/55 leading-none">
-          Cycle
-        </div>
-        <div className="mt-1 text-[12px] italic font-light text-ink leading-none tracking-[-0.01em]">
-          04.1
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────── */
-/*  Mobile cycle list                                               */
-/* ──────────────────────────────────────────────────────────────── */
-
-function MobileCycleList() {
-  return (
-    <ol className="lg:hidden relative ml-2 sm:ml-3 border-l border-hairline space-y-6 sm:space-y-7">
-      {phases.map((p, i) => {
-        const isLast = i === phases.length - 1;
-        return (
-          <li key={p.id} className="relative pl-5 sm:pl-6">
-            <span
-              aria-hidden
-              className="absolute -left-[7px] top-1 w-3.5 h-3.5 grid place-items-center"
-            >
-              {isLast && (
-                <span className="absolute inset-0 rounded-full bg-violet/30 animate-ping" />
-              )}
-              <span className="relative w-3.5 h-3.5 rounded-full bg-canvas ring-1 ring-ink-soft/30 grid place-items-center">
-                <span className="w-2 h-2 rounded-full bg-gradient-bv" />
-              </span>
-            </span>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease, delay: 0.05 * i }}
-            >
-              <div className="flex items-baseline justify-between gap-2">
-                <span className="text-[11px] font-mono tabular-nums text-gradient-bv font-semibold tracking-[0.04em]">
-                  {p.index}
-                </span>
-                <span className="text-[9.5px] sm:text-[10px] font-mono uppercase tracking-[0.18em] text-ink-soft/60 whitespace-nowrap">
-                  {p.week}
-                </span>
-              </div>
-              <h3 className="mt-1.5 text-[17px] sm:text-[18px] font-semibold text-ink leading-tight tracking-[-0.01em]">
-                {p.short}.
-              </h3>
-              <p className="mt-1.5 text-[12.5px] sm:text-[13px] text-ink-soft leading-[1.55] text-pretty">
-                {p.line}
-              </p>
-            </motion.div>
-          </li>
-        );
-      })}
-
-    </ol>
-  );
-}
